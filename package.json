@@ -10,7 +10,8 @@
     "dev": "nodemon index.js",
     "debug": "nodemon --inspect index.js",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "predeploy": "git archive -v -o jr-cms.zip --format=zip HEAD"
   },
   "keywords": [],
   "author": "",

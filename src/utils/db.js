@@ -1,18 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 exports.connectToDB = () => {
-  let database = process.env.DB_NAME || 'jr-cms';
-  if (process.env.NODE_ENV === 'test') {
-    database += '_test';
+  let database = process.env.DB_NAME || "jr-cms";
+  if (process.env.NODE_ENV === "test") {
+    database += "_test";
   }
   const connectionString =
-    process.env.CONNECTION_STRING || 'mongodb://localhost:27017/' + database;
+    (process.env.CONNECTION_STRING || "mongodb://localhost:27017/") + database;
   const db = mongoose.connection;
-  db.on('connected', () => {
+  db.on("connected", () => {
     console.log(`DB connected with ${connectionString}`);
   });
-  db.on('error', (error) => {
-    console.log('DB connection failed');
+  db.on("error", (error) => {
+    console.log("DB connection failed");
     console.log(error.message);
     // 正常关闭
     // 非正常关闭
@@ -21,12 +21,12 @@ exports.connectToDB = () => {
     // 人为非正常关闭 -》 非0状态
     process.exit(1);
   });
-  db.on('disconnected', () => {
-    console.log('disconnected');
+  db.on("disconnected", () => {
+    console.log("disconnected");
   });
   mongoose.connect(connectionString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   });
 };
 

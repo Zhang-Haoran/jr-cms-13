@@ -1,0 +1,29 @@
+//只挂载主要文件，没安装npm的文件，需要进去容器，手动npm install
+
+version: "3"
+services:
+  server:
+    image: node:14-alpine
+    ports:
+      - 3000:3000
+    container_name: jr-cms-13_server
+    depends_on:
+      - mongo
+    tty: true
+    env_file: .env
+    volumes:
+      #left 本机路径
+      #right 挂载路径
+      - ./:/app
+      command: >
+      sh -c "cd /app && rm -rf node_modules/ && npm i && npm run dev"
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: jr-cms-13_mongo
+# jr-cms-13 % docker-compose -f docker-compose-dev.yaml up
+#docker exec -ti jr-cms-13_server ls
+#docker-compose down
+#docker-compose prune
+#docker image remove jr-13

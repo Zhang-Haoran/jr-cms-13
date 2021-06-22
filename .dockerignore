@@ -1,0 +1,7 @@
+/data
+node_modules
+.env
+docker-demo
+jwt
+bcrypt
+#只ignore dockerfile，不管docker-compose的
